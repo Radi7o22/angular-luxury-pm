@@ -1,0 +1,45 @@
+@use '~@angular/material' as mat;
+@include mat.core();
+
+$pm-luxury-primary: mat.define-palette(mat.$red-palette, 900, A100, A200);
+$pm-luxury-accent: mat.define-palette(mat.$gray-palette, 900);
+$pm-luxury-warn: mat.define-palette(mat.$red-palette);
+
+$bodyFontSize: 1.46rem;
+$buttonFontSize: 1.5rem;
+$captionFontSize: 1.2rem;
+
+$pm-luxury-typography: mat.define-typography-config(
+  $button:
+    mat.define-typography-level(
+      $font-family: "Calibri",
+      $font-weight: 200,
+      $font-size: $buttonFontSize
+    ),
+  $caption:
+    mat.define-typography-level(
+      $font-size: $captionFontSize
+    ),
+  $body-1:
+    mat.define-typography-level(
+      $font-family: "Calibri",
+      $font-weight: 300,
+      $font-size: $bodyFontSize
+    )
+);
+
+$pm-luxury-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $pm-luxury-primary,
+      accent: $pm-luxury-accent,
+      warn: $pm-luxury-warn
+    ),
+    typography: $pm-luxury-typography
+  )
+);
+
+@include mat.all-component-themes($pm-luxury-theme);
+@include mat.core-theme($pm-luxury-theme);
+@include mat.all-component-themes($pm-luxury-theme);
+@include mat.button-theme($pm-luxury-theme);

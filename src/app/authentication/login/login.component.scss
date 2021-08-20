@@ -1,0 +1,10 @@
+.login-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+mat-form-field {
+  padding-bottom: 0.5em;
+}

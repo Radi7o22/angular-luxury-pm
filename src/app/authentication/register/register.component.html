@@ -1,0 +1,40 @@
+<form #registerForm="ngForm" class="register-form-container">
+    <mat-form-field>
+        <mat-label>Enter username</mat-label>
+        <input matInput #username="ngModel" ngModel type="text" name="username" required minlength="4">
+        <mat-error *ngIf="username.errors?.required">Username is required</mat-error>
+        <mat-error *ngIf="username.errors?.minlength">Username must be at least 4 characters</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Enter email</mat-label>
+        <input matInput #email="ngModel" ngModel type="email" name="email" required [pmFormValidator]="emailValidator">
+        <mat-error *ngIf="email.errors?.required">Email is required</mat-error>
+        <mat-error *ngIf="email.errors?.invalidEmail">Wrong email format</mat-error>
+    </mat-form-field>
+
+    <div ngModelGroup="passwords" [pmFormValidator]="matchPasswordsValidator">
+        <mat-form-field>
+            <mat-label>Enter password</mat-label>
+            <input matInput #password="ngModel" ngModel type="password" name="password" required minlength="8" autocomplete="off">
+            <mat-error *ngIf="password.errors?.required">Password is required</mat-error>
+            <mat-error *ngIf="password.errors?.minlength">Password must be at least 8 characters</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Repeat password</mat-label>
+            <input matInput #repeatPassword="ngModel" ngModel type="password" name="repeatPassword" required minlength="8"
+                autocomplete="off">
+            <mat-error *ngIf="repeatPassword.errors?.required">Repeat password is required</mat-error>
+            <mat-error *ngIf="repeatPassword.errors?.minlength">Repeat password must be at least 8 characters</mat-error>
+            <mat-error *ngIf="repeatPassword.errors?.invalidPasswords">Repeat password doesn't match password</mat-error>
+        </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" [disabled]="registerForm.invalid" (click)="register(registerForm)">Register</button>
+
+    <p class="center-text">
+        Already have an account?
+        <a routerLink="/login">Log in</a>
+    </p>
+</form>
