@@ -1,6 +1,7 @@
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {environment} from "src/environments/environment";
+import {Constants} from "../core/constants";
 import {User} from "./models/user";
 
 const baseURL = environment.baseURL;
@@ -9,13 +10,13 @@ const baseURL = environment.baseURL;
   providedIn: "root"
 })
 export class UserService {
-  headerOptions: object;
+  headerOptions: any;
 
   constructor(private http: HttpClient) {
     this.headerOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
-        Authorization: "Bearer + token goes here"
+        Authorization: `Bearer${localStorage.getItem(Constants.JWT)}`
       })
     };
   }

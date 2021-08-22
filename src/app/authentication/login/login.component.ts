@@ -1,10 +1,10 @@
 import {Component, OnInit} from "@angular/core";
 import {NgForm} from "@angular/forms";
+import {Router} from "@angular/router";
 import {Store} from "@ngrx/store";
-import {Observable} from "rxjs";
-import {User} from "src/app/user/models/user";
-import {login} from "../+store/actions";
-import {selectIsLoggedIn} from "../+store/selectors";
+import {Observable, Subscription} from "rxjs";
+import {login} from "src/app/+store/actions";
+import {selectIsLoggedIn} from "src/app/+store/selectors";
 
 @Component({
   selector: "pm-login",
@@ -12,13 +12,21 @@ import {selectIsLoggedIn} from "../+store/selectors";
   styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
-  credentials$: Observable<any> = this.store.select(selectIsLoggedIn); //select izvlicha state ot store
+  credentials$: Observable<any> = this.store.select(selectIsLoggedIn);
 
-  constructor(private store: Store<any>) {}
+  constructor(private store: Store<any>, private router: Router) {}
 
   ngOnInit(): void {}
 
   login(form: NgForm): void {
     this.store.dispatch(login({credentials: {username: form.value.username, password: form.value.password}}));
+    let subscription = new Subscription();
+    subscription.add(
+      this.credentials$.subscribe((response) => {
+        if (response) {
+          this.router.navigate(["/"]);
+        }
+      })
+    );
   }
 }

@@ -7,6 +7,10 @@ import {ProductsListComponent} from "./products/components/products-list/product
 import {DeliveryInfoComponent} from "./shopping-cart/components/delivery-info/delivery-info.component";
 import {ProductDetailsComponent} from "./products/components/product-details/product-details.component";
 import {FeaturesRoutingModule} from "./features-routing.module";
+import {StoreModule} from "@ngrx/store";
+import {EffectsModule} from "@ngrx/effects";
+import {ProductsEffects} from "./products/+store/effects";
+import {productsReducers} from "./products/+store";
 
 @NgModule({
   declarations: [
@@ -17,7 +21,12 @@ import {FeaturesRoutingModule} from "./features-routing.module";
     DeliveryInfoComponent,
     ProductDetailsComponent
   ],
-  imports: [CommonModule, FeaturesRoutingModule],
+  imports: [
+    CommonModule,
+    FeaturesRoutingModule,
+    StoreModule.forFeature("products", productsReducers),
+    EffectsModule.forFeature([ProductsEffects])
+  ],
   exports: []
 })
 export class FeaturesModule {}

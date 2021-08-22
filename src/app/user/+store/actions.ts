@@ -5,4 +5,4 @@ export enum UserActionTypes {
   USER_DATA_RECEIVED = "[User] User Data Received"
 }
 
-export const userDataReceived = createAction(UserActionTypes.USER_DATA_RECEIVED, props<User>());
+export const userDataReceived = createAction(UserActionTypes.USER_DATA_RECEIVED, props<{user: User}>());

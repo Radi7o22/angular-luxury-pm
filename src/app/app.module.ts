@@ -8,7 +8,14 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FeaturesModule} from "./features/features.module";
 import {SharedModule} from "./shared/shared.module";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
+import {StoreModule} from "@ngrx/store";
+import {reducers} from "./+store";
+import {AuthEffects} from "./+store/effects";
+import {EffectsModule} from "@ngrx/effects";
+import {ErrorHandlerInterceptor} from "./core/error-handler-interceptor";
+import {UserModule} from "./user/user.module";
+import {MDBBootstrapModule} from "angular-bootstrap-md";
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,10 +27,20 @@ import {HttpClientModule} from "@angular/common/http";
     AuthenticationModule,
     BrowserAnimationsModule,
     FeaturesModule,
+    UserModule,
     SharedModule,
-    StoreDevtoolsModule.instrument({})
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([AuthEffects]),
+    StoreDevtoolsModule.instrument({}),
+    MDBBootstrapModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorHandlerInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

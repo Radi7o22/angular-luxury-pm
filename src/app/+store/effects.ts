@@ -2,8 +2,8 @@ import {createEffect, Actions, ofType} from "@ngrx/effects";
 import {AuthActionTypes, loginFailure, loginSuccess, registerFailure, registerSuccess} from "./actions";
 import {catchError, map, switchMap, takeUntil} from "rxjs/operators";
 import {Injectable} from "@angular/core";
-import {AuthenticationService} from "../authentication.service";
 import {Constants} from "src/app/core/constants";
+import {AuthenticationService} from "../authentication/authentication.service";
 
 @Injectable()
 export class AuthEffects {
@@ -16,6 +16,7 @@ export class AuthEffects {
         this.authService.login(action.credentials.username, action.credentials.password).pipe(
           map((response) => {
             localStorage.setItem(Constants.JWT, JSON.stringify(response.headers.get("Authorization")));
+            localStorage.setItem(Constants.LOGGED_USERNAME, JSON.stringify(action.credentials.username));
             return loginSuccess();
           }),
           catchError((error) => {

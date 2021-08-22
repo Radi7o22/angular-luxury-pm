@@ -1,14 +1,17 @@
-import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
-import {UserService} from "./user-service";
 import {StoreModule} from "@ngrx/store";
-import {userReducer} from "./+store/reducers";
 import {EffectsModule} from "@ngrx/effects";
 import {UserDetailsEffects} from "./+store/effects";
+import {reducers} from "./+store";
+import {UserComponent} from "./components/user/user.component";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {UserRoutingModule} from "./user-routing.module";
+import {NgModule} from "@angular/core";
 
 @NgModule({
-  declarations: [],
-  imports: [CommonModule, StoreModule.forFeature("user", userReducer), EffectsModule.forFeature([UserDetailsEffects])],
-  exports: [UserService]
+  declarations: [UserComponent],
+  imports: [UserRoutingModule, CommonModule, StoreModule.forFeature("user", reducers), EffectsModule.forFeature([UserDetailsEffects])],
+  exports: [],
+  providers: []
 })
-export class AuthenticationModule {}
+export class UserModule {}
