@@ -1,1 +1,55 @@
-<p>navigation works!</p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <a class="navbar-brand mt-2 mt-lg-2 mb-lg-2" href="#">
+                <img src="../../../../assets/images/luxury_pm_logo.png" height="30" alt="" loading="lazy" />
+            </a>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/products" routerLinkActive="active">Products</a>
+                </li>
+                <li class="nav-item me-3 me-lg-0 dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                        Categories
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li *ngFor="let category of categories$ | async as categories">
+                            <a class="dropdown-item" href="#">{{category.name}}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="d-flex align-items-center">
+            <a class="text-reset me-3 dropdown-toggle hidden-arrow" role="button" aria-expanded="false">
+                <i routerLink="/shopping-cart" routerLinkActive="active" class="fas fa-shopping-cart"></i>
+                <span class="badge rounded-pill badge-notification bg-danger">1</span>
+            </a>
+            <ul *ngIf="!isUserLoggedIn()" class="navbar-nav flex-row d-none d-md-flex">
+                <li class="nav-item me-3 me-lg-0">
+                    <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+                </li>
+                <li class="nav-item me-3 me-lg-0">
+                    <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
+                </li>
+            </ul>
+
+            <ul *ngIf="isUserLoggedIn()" class="navbar-nav">
+                <li class="nav-item me-3 me-lg-0">
+                    <a class="nav-link" routerLink="/user-profile" routerLinkActive="active">
+                        <i class="fas fa-user"></i>
+                    </a>
+                </li>
+                <li class="nav-item me-3 me-lg-0">
+                    <a class="nav-link" (click)="logout()">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

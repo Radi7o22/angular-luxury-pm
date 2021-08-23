@@ -1,1 +1,16 @@
-<p>shopping-cart-item works!</p>
+<div class="card m-3 card-container">
+    <div class="row g-0">
+        <div class="col-md-2 m-3">
+            <img src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.jpg" alt="..."
+                class="m-3 img-fluid z-depth-2 rounded-circle" />
+        </div>
+        <div class="col-md-9">
+            <div class="card-body">
+                <h3 class="card-title">{{product.name}}</h3>
+                <p class="card-text ">
+                    <small>{{product.price | currency: "BG"}}</small>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

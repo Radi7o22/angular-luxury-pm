@@ -1,40 +1,60 @@
-<form #registerForm="ngForm" class="register-form-container">
-    <mat-form-field>
-        <mat-label>Enter username</mat-label>
-        <input matInput #username="ngModel" ngModel type="text" name="username" required minlength="4">
-        <mat-error *ngIf="username.errors?.required">Username is required</mat-error>
-        <mat-error *ngIf="username.errors?.minlength">Username must be at least 4 characters</mat-error>
-    </mat-form-field>
+<div id="intro" class="bg-image shadow-2-strong">
+    <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0, 0, 0, 0.8);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-5 col-md-8">
+                    <form #registerForm="ngForm" class="bg-dark text-light rounded-5 shadow-5-strong p-5">
 
-    <mat-form-field>
-        <mat-label>Enter email</mat-label>
-        <input matInput #email="ngModel" ngModel type="email" name="email" required [pmFormValidator]="emailValidator">
-        <mat-error *ngIf="email.errors?.required">Email is required</mat-error>
-        <mat-error *ngIf="email.errors?.invalidEmail">Wrong email format</mat-error>
-    </mat-form-field>
+                        <div class="form-outline mb-4">
+                            <input #username="ngModel" ngModel id="formUsername" class="form-control" type="text" name="username" required
+                                minlength="4">
+                            <label class="form-label" for="formUsername">Username</label>
+                            <div class="text-danger" *ngIf="username.errors?.required && username.touched">Username is required</div>
+                            <div class="text-danger" *ngIf="username.errors?.minlength && username.touched">Username must be at least 4
+                                characters</div>
+                        </div>
 
-    <div ngModelGroup="passwords" [pmFormValidator]="matchPasswordsValidator">
-        <mat-form-field>
-            <mat-label>Enter password</mat-label>
-            <input matInput #password="ngModel" ngModel type="password" name="password" required minlength="8" autocomplete="off">
-            <mat-error *ngIf="password.errors?.required">Password is required</mat-error>
-            <mat-error *ngIf="password.errors?.minlength">Password must be at least 8 characters</mat-error>
-        </mat-form-field>
+                        <div class="form-outline mb-4">
+                            <input #email="ngModel" ngModel type="email" name="email" required [pmFormValidator]="emailValidator"
+                                id="formEmail" class="form-control">
+                            <label class="form-label" for="formEmail">Email</label>
+                            <div class="text-danger" *ngIf="email.errors?.required && email.touched">Email is required</div>
+                            <div class="text-danger" *ngIf="email.errors?.invalidEmail && email.touched">Wrong email format</div>
+                        </div>
 
-        <mat-form-field>
-            <mat-label>Repeat password</mat-label>
-            <input matInput #repeatPassword="ngModel" ngModel type="password" name="repeatPassword" required minlength="8"
-                autocomplete="off">
-            <mat-error *ngIf="repeatPassword.errors?.required">Repeat password is required</mat-error>
-            <mat-error *ngIf="repeatPassword.errors?.minlength">Repeat password must be at least 8 characters</mat-error>
-            <mat-error *ngIf="repeatPassword.errors?.invalidPasswords">Repeat password doesn't match password</mat-error>
-        </mat-form-field>
+                        <div ngModelGroup="passwords" [pmFormValidator]="matchPasswordsValidator" class="form-outline mb-4">
+                            <input #password="ngModel" ngModel type="password" name="password" required minlength="8" autocomplete="off"
+                                id="formPassword" class="form-control">
+                            <label class="form-label mb-4" for="formPassword">Password</label>
+                            <div class="text-danger mb-4" *ngIf="password.errors?.required && password.touched">Password is required</div>
+                            <div class="text-danger mb-4" *ngIf="password.errors?.minlength && password.touched">Password must be at least
+                                8 characters</div>
+
+                            <input #repeatPassword="ngModel" ngModel type="password" name="repeatPassword" required minlength="8"
+                                autocomplete="off" id="formRepeatPassword" class="form-control">
+                            <label class="form-label" for="formRepeatPassword"> Repeat Password</label>
+                            <div class="text-danger mb-4" *ngIf="repeatPassword.errors?.required && repeatPassword.touched">Repeat password
+                                is required</div>
+                            <div class="text-danger mb-4" *ngIf="repeatPassword.errors?.minlength && repeatPassword.touched">Repeat password
+                                must be at least 8
+                                characters</div>
+                            <div class="text-danger mb-4" *ngIf="repeatPassword.errors?.invalidPasswords && repeatPassword.touched">Repeat
+                                password doesn't match
+                                password</div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col text-center">
+                                Already have an account?
+                                <a routerLink="/login">Log in</a>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-danger btn-block" [disabled]="registerForm.invalid"
+                            (click)="register(registerForm)">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <button mat-raised-button color="primary" [disabled]="registerForm.invalid" (click)="register(registerForm)">Register</button>
-
-    <p class="center-text">
-        Already have an account?
-        <a routerLink="/login">Log in</a>
-    </p>
-</form>
+</div>

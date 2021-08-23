@@ -19,6 +19,10 @@ export class ItemService {
     return this.http.get<Item[]>(`${baseURL}/items/category/${categoryId}/subcategory/${subcategoryId}`);
   }
 
+  findByCategory(categoryId: number) {
+    return this.http.get<Item[]>(`${baseURL}/items/category/${categoryId}`);
+  }
+
   getItemDetails(itemId: number) {
     return this.http.get<Item>(`${baseURL}/items/${itemId}`);
   }

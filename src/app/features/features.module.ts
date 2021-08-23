@@ -11,6 +11,8 @@ import {StoreModule} from "@ngrx/store";
 import {EffectsModule} from "@ngrx/effects";
 import {ProductsEffects} from "./products/+store/effects";
 import {productsReducers} from "./products/+store";
+import {HeaderComponent} from "../core/components/header/header.component";
+import {CoreModule} from "../core/core.module";
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import {productsReducers} from "./products/+store";
     CommonModule,
     FeaturesRoutingModule,
     StoreModule.forFeature("products", productsReducers),
-    EffectsModule.forFeature([ProductsEffects])
+    EffectsModule.forFeature([ProductsEffects]),
+    CoreModule
   ],
   exports: []
 })

@@ -1,1 +1,10 @@
-<p>shopping-cart works!</p>
+<div class="container-fluid text-light">
+    <div *ngIf="(shoppingCartList$ | async)?.length === 0">Shopping cart is empty!</div>
+    <div class="row">
+        <div class="col-12">
+            <pm-shopping-cart-item [product]="product" class="mb-5"
+                *ngFor="let product of shoppingCartList$ | async as shoppingCartProducts">
+            </pm-shopping-cart-item>
+        </div>
+    </div>
+</div>

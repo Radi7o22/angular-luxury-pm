@@ -1,7 +1,6 @@
-<p>products-list works!</p>
-<div>
-    <pm-product-item></pm-product-item>
-    <pm-product-item></pm-product-item>
-    <pm-product-item></pm-product-item>
-    <pm-product-item></pm-product-item>
+<pm-header></pm-header>
+<div class="container-fluid">
+    <div class="row row-cols-1 row-cols-md-4">
+        <pm-product-item [product]="product" class="mb-5" *ngFor="let product of productsList$ | async as products"></pm-product-item>
+    </div>
 </div>

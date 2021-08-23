@@ -17,6 +17,7 @@ export class AuthEffects {
           map((response) => {
             localStorage.setItem(Constants.JWT, JSON.stringify(response.headers.get("Authorization")));
             localStorage.setItem(Constants.LOGGED_USERNAME, JSON.stringify(action.credentials.username));
+            localStorage.setItem(Constants.IS_USER_LOGGED_IN, "true");
             return loginSuccess();
           }),
           catchError((error) => {

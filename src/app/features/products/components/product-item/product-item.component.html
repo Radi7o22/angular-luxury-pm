@@ -1,3 +1,18 @@
-<div>
-
+<div class="col">
+    <div class="bg-image" data-mdb-ripple-color="light">
+        <img src="https://mdbootstrap.com/img/new/standard/nature/111.jpg" class="z-depth-2 img-fluid" />
+        <a href="#!">
+            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+        </a>
+    </div>
+    <div class="card-body text-white card-container">
+        <h5 class="card-title"> {{product.categoryName}}</h5>
+        <p class="card-text">
+            {{product.name}}
+        </p>
+        <p class="card-text">
+            {{product.price | currency:'BG'}}
+        </p>
+        <a class="btn btn-danger" (click)="addToCart()">Add to cart</a>
+    </div>
 </div>

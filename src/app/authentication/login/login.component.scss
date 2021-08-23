@@ -1,10 +1,10 @@
-.login-form-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+#intro {
+  background-image: url(../../../assets/images/login.jpg);
+  height: 100vh;
 }
 
-mat-form-field {
-  padding-bottom: 0.5em;
+@media (min-width: 992px) {
+  #intro {
+    margin-top: -58.59px;
+  }
 }

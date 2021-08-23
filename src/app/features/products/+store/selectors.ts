@@ -6,3 +6,5 @@ const productsModuleSelector = createFeatureSelector<ProductsState>("products");
 const selectProductsList = createSelector(productsModuleSelector, (state) => state.productsList);
 
 export const selectProductsListProducts = createSelector(selectProductsList, (state) => state.products);
+export const selectCategories = createSelector(selectProductsList, (state) => state.categories);
+export const selectShoppingCartList = createSelector(selectProductsList, (state) => state.shoppingCartItems);

@@ -1,19 +1,39 @@
-<form #loginForm="ngForm" class="login-form-container">
-    <mat-form-field>
-        <mat-label>Enter username</mat-label>
-        <input matInput #username="ngModel" ngModel type="text" name="username" required minlength="4">
-        <mat-error *ngIf="username.errors?.required">Username is required</mat-error>
-        <mat-error *ngIf="username.errors?.minlength">Username must be at least 4 characters</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Enter password</mat-label>
-        <input matInput #password="ngModel" ngModel type="password" name="password" required minlength="8">
-        <mat-error *ngIf="password.errors?.required">Password is required</mat-error>
-        <mat-error *ngIf="password.errors?.minlength">Password must be at least 8 characters</mat-error>
-    </mat-form-field>
-    <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="login(loginForm)">Login</button>
-    <p class="center-text">
-        Don't have an account?
-        <a routerLink="/register">Sign up</a>
-    </p>
-</form>
+<div id="intro" class="bg-image shadow-2-strong">
+    <div class="mask d-flex align-items-center h-100" style="background-color: rgba(0, 0, 0, 0.8);">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-5 col-md-8">
+                    <form #loginForm="ngForm" class="bg-dark text-light rounded-5 shadow-5-strong p-5">
+
+                        <div class="form-outline mb-4">
+                            <input #username="ngModel" ngModel id="formUsername" class="form-control" type="text" name="username" required
+                                minlength="4">
+                            <label class="form-label" for="formUsername">Username</label>
+                            <div class="text-danger" *ngIf="username.errors?.required && username.touched">Username is required</div>
+                            <div class="text-danger" *ngIf="username.errors?.minlength && username.touched">Username must be at least 4
+                                characters</div>
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <input #password="ngModel" ngModel id="formPassword" class="form-control" type="password" name="password"
+                                required minlength="8">
+                            <label class="form-label" for="formPassword">Password</label>
+                            <div class="text-danger" *ngIf="password.errors?.required && password.touched">Password is required</div>
+                            <div class="text-danger" *ngIf="password.errors?.minlength && password.touched">Password must be at least 8
+                                characters</div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col text-center">
+                                Don't have an account?
+                                <a routerLink="/register">Sign up</a>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-danger btn-block" [disabled]="loginForm.invalid" (click)="login(loginForm)">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

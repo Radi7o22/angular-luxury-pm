@@ -13,10 +13,13 @@ export class AuthActivate implements CanActivate {
   ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     const {authenticationRequired, authenticationFailureRedirectUrl} = route.data;
     let isUserLoggedIn = false;
-    localStorage.getItem(Constants.JWT) ? (isUserLoggedIn = true) : (isUserLoggedIn = false);
-
-    if (typeof authenticationRequired === "boolean" && authenticationRequired === isUserLoggedIn) {
-      return true;
+    localStorage.getItem(Constants.IS_USER_LOGGED_IN) ? (isUserLoggedIn = true) : (isUserLoggedIn = false);
+    if ((isUserLoggedIn && state.url === "/login") || (isUserLoggedIn && state.url === "/register")) {
+      return this.router.parseUrl(authenticationFailureRedirectUrl || "/");
+    } else if (typeof authenticationRequired === "boolean") {
+      if ((authenticationRequired && isUserLoggedIn) || !authenticationRequired) {
+        return true;
+      }
     }
     return this.router.parseUrl(authenticationFailureRedirectUrl || "/");
   }

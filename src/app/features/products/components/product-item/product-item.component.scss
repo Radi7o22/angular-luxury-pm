@@ -1,7 +1,9 @@
-div {
-  background-color: red;
-  border: 1px solid black;
-  height: 300px;
-  width: 300px;
-  margin-left: 20px;
+.card-container {
+  background-color: #4f4f4f;
+  border-radius: 0 0 0.7rem 0.7rem;
+  box-shadow: 5px 6px 14px -4px #000000;
+}
+
+img {
+  border-radius: 0.7rem 0.7rem 0 0;
 }

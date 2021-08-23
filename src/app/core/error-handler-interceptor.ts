@@ -28,7 +28,7 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
         break;
       }
       case 403: {
-        userErrorMessage = "Please login to your account";
+        userErrorMessage = "Username or password is incorrect";
         break;
       }
       case 401: {
