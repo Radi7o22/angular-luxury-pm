@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {FormControl, Validators} from "@angular/forms";
 import {Store} from "@ngrx/store";
-import {changeProductQuantityInCart, deleteItemFromCart} from "src/app/features/products/+store/actions";
+import {deleteItemFromCart} from "../../+store/actions";
 import {ItemInOrder} from "../../models/item-in-order";
+import {ShoppingCartService} from "../../services/shopping-cart.service";
 
 @Component({
   selector: "pm-shopping-cart-item",
@@ -10,9 +11,10 @@ import {ItemInOrder} from "../../models/item-in-order";
   styleUrls: ["./shopping-cart-item.component.scss"]
 })
 export class ShoppingCartItemComponent implements OnInit {
-  constructor(private store: Store<any>) {}
+  constructor(private store: Store<any>, private shoppingCartService: ShoppingCartService) {}
   @Input() product!: ItemInOrder;
   @Input() shoppingCartProducts!: [];
+  @Output() quantityFormControlChange = new EventEmitter<boolean>();
 
   quantity!: FormControl;
 
@@ -21,16 +23,15 @@ export class ShoppingCartItemComponent implements OnInit {
   }
 
   removeItemFromCart() {
+    let isInvalid = false;
+    this.quantityFormControlChange.emit(isInvalid);
     this.store.dispatch(deleteItemFromCart({item: this.product}));
   }
 
   changeItemQuantity() {
+    this.quantityFormControlChange.emit(this.quantity.invalid);
     if (!this.quantity.invalid) {
-      let itemInCart = this.product;
-      let existingItemIndex: any = this.shoppingCartProducts.findIndex((item: ItemInOrder) => item.itemId === itemInCart.itemId);
-      let itemsInCart: any = this.shoppingCartProducts.map((x) => Object.assign({}, x));
-      itemsInCart[existingItemIndex].quantity = parseInt(this.quantity.value);
-      this.store.dispatch(changeProductQuantityInCart({shoppingCartItems: itemsInCart}));
+      this.shoppingCartService.changeItemQuantity(this.product, this.shoppingCartProducts, this.quantity);
     }
   }
 }

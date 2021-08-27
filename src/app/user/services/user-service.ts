@@ -1,8 +1,8 @@
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {environment} from "src/environments/environment";
-import {Constants} from "../core/constants";
-import {User} from "./models/user";
+import {Constants} from "../../core/constants";
+import {User} from "../models/user";
 
 const baseURL = environment.baseURL;
 
@@ -10,9 +10,7 @@ const baseURL = environment.baseURL;
   providedIn: "root"
 })
 export class UserService {
-  constructor(private http: HttpClient) {
-    console.log("headers in constructor are loaded");
-  }
+  constructor(private http: HttpClient) {}
 
   updateProfile(user: User) {
     return this.http.post(`${baseURL}/users/update`, user, this.getHeaders());

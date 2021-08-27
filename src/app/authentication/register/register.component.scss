@@ -1,10 +1,25 @@
 #intro {
-  background-image: url(../../../assets/images/pm_header.jpg);
-  height: 100vh;
+  background-image: url(../../../assets/images/registration-bg.jpg);
+  height: calc(100vh + 57px);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 
 @media (min-width: 992px) {
   #intro {
     margin-top: -58.59px;
   }
+}
+
+button {
+  font-size: 1.4rem;
+}
+
+a {
+  color: #f93154;
+}
+
+a:hover {
+  color: #fff;
 }

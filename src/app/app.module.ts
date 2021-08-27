@@ -16,6 +16,8 @@ import {EffectsModule} from "@ngrx/effects";
 import {ErrorHandlerInterceptor} from "./core/error-handler-interceptor";
 import {UserModule} from "./user/user.module";
 import {MDBBootstrapModule} from "angular-bootstrap-md";
+import {ShoppingCartModule} from "./features/shopping-cart/shopping-cart.module";
+import {ProductsModule} from "./features/products/products.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +28,8 @@ import {MDBBootstrapModule} from "angular-bootstrap-md";
     CoreModule,
     AuthenticationModule,
     BrowserAnimationsModule,
-    FeaturesModule,
+    ShoppingCartModule,
+    ProductsModule,
     UserModule,
     SharedModule,
     StoreModule.forRoot(reducers),

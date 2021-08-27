@@ -1,9 +1,7 @@
 <div class="container-fluid text-light">
     <div class="row">
         <div class="col-6">
-            <div class="image-container" [ngStyle]="{'background-image': getProductMainImage()}">
-                <!-- <img src={{mainImg}} class="z-depth-2 img-fluid" /> -->
-            </div>
+            <div class="image-container" [ngStyle]="{'background-image': getProductDetailsImage()}"></div>
         </div>
         <div class="col-6 product-details-container">
             <h4 class="text-danger">{{itemDetails?.categoryName}}</h4>
@@ -14,7 +12,7 @@
                 {{itemDetails?.description}}
             </div>
             <hr>
-            <a class="btn btn-outline-light btn-lg mt-3" role="button">Добави в количката</a>
+            <a class="btn btn-outline-light btn-lg mt-3" (click)="addToCart()" role="button">Добави в количката</a>
         </div>
     </div>
 </div>

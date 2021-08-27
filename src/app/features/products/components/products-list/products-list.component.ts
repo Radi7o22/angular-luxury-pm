@@ -1,9 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {Store} from "@ngrx/store";
 import {Observable, Subscription} from "rxjs";
-import {selectIsLoggedIn} from "src/app/+store/selectors";
-import {getCategories, getProducts} from "../../+store/actions";
-import {selectCategories, selectProductsListProducts} from "../../+store/selectors";
+import {getProducts} from "../../+store/actions";
+import {selectProductsListProducts} from "../../+store/selectors";
 
 @Component({
   selector: "pm-products-list",

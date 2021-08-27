@@ -2,8 +2,7 @@ import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {catchError, map, switchMap} from "rxjs/operators";
 import {NotificationService} from "src/app/shared/services/notification.service";
-import {User} from "../models/user";
-import {UserService} from "../user-service";
+import {UserService} from "../services/user-service";
 import {getUserProfileFail, getUserProfileSuccess, updateUserProfileFail, updateUserProfileSuccess, UserActionTypes} from "./actions";
 
 @Injectable()

@@ -4,10 +4,6 @@ import {Category} from "../models/category";
 import {Item} from "../models/item";
 import {ItemDetails} from "../models/item-details";
 import {
-  addProductToCart,
-  changeProductQuantityInCart,
-  deleteAllItemsFromCart,
-  deleteItemFromCart,
   getCategories,
   getCategoriesFail,
   getCategoriesSuccess,
@@ -19,10 +15,7 @@ import {
   getProductsInCategory,
   getProductsInCategoryFail,
   getProductsInCategorySuccess,
-  getProductsSuccess,
-  makeOrder,
-  makeOrderFail,
-  makeOrderSuccess
+  getProductsSuccess
 } from "./actions";
 
 export interface ProductsListData {
@@ -45,7 +38,7 @@ export const initialProductsListState: ProductsListData = {
 
 export const productsListReducer = createReducer(
   initialProductsListState,
-  on(getProducts, getCategories, makeOrder, getProductDetails, getProductsInCategory, (state) => ({
+  on(getProducts, getCategories, getProductDetails, getProductsInCategory, (state) => ({
     ...state,
     isLoading: true
   })),
@@ -54,7 +47,7 @@ export const productsListReducer = createReducer(
     products: products,
     isLoading: false
   })),
-  on(getProductsFail, getCategoriesFail, makeOrderFail, getProductDetailsFail, getProductsInCategoryFail, (state, error) => ({
+  on(getProductsFail, getCategoriesFail, getProductDetailsFail, getProductsInCategoryFail, (state, error) => ({
     ...state,
     isLoading: false,
     errorMessage: error
@@ -64,30 +57,9 @@ export const productsListReducer = createReducer(
     categories: categories,
     isLoading: false
   })),
-  on(addProductToCart, (state, {item}) => ({
-    ...state,
-    shoppingCartItems: [...state.shoppingCartItems, item]
-  })),
-  on(makeOrderSuccess, (state) => ({
-    ...state,
-    shoppingCartItems: [],
-    isLoading: false
-  })),
   on(getProductDetailsSuccess, (state, {payload: {item}}) => ({
     ...state,
     isLoading: false,
     itemDetails: item
-  })),
-  on(changeProductQuantityInCart, (state, {shoppingCartItems}) => ({
-    ...state,
-    shoppingCartItems: shoppingCartItems
-  })),
-  on(deleteItemFromCart, (state, {item}) => ({
-    ...state,
-    shoppingCartItems: state.shoppingCartItems.filter((itemInCart) => itemInCart.itemId !== item.itemId)
-  })),
-  on(deleteAllItemsFromCart, (state) => ({
-    ...state,
-    shoppingCartItems: []
   }))
 );

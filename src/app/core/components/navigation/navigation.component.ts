@@ -2,13 +2,14 @@ import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
-import {map, tap} from "rxjs/operators";
-import {deleteAllItemsFromCart, getProducts, getProductsInCategory} from "src/app/features/products/+store/actions";
-import {selectCategories, selectShoppingCartList} from "src/app/features/products/+store/selectors";
+import {getProducts, getProductsInCategory} from "src/app/features/products/+store/actions";
+import {selectCategories} from "src/app/features/products/+store/selectors";
 import {Category} from "src/app/features/products/models/category";
 import {logout} from "src/app/user/+store/actions";
 import {Constants} from "../../constants";
 import {ItemInOrder} from "src/app/features/shopping-cart/models/item-in-order";
+import {deleteAllItemsFromCart} from "src/app/features/shopping-cart/+store/actions";
+import {selectShoppingCartList} from "src/app/features/shopping-cart/+store/selectors";
 
 @Component({
   selector: "pm-navigation",

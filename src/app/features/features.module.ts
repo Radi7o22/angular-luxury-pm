@@ -14,21 +14,18 @@ import {productsReducers} from "./products/+store";
 import {CoreModule} from "../core/core.module";
 import {UserModule} from "../user/user.module";
 import {ReactiveFormsModule} from "@angular/forms";
+import {ShoppingCartEffects} from "./shopping-cart/+store/effects";
+import {shoppingCartReducers} from "./shopping-cart/+store";
 
 @NgModule({
-  declarations: [
-    ShoppingCartComponent,
-    ShoppingCartItemComponent,
-    ProductItemComponent,
-    ProductsListComponent,
-    DeliveryInfoComponent,
-    ProductDetailsComponent
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     FeaturesRoutingModule,
     StoreModule.forFeature("products", productsReducers),
     EffectsModule.forFeature([ProductsEffects]),
+    StoreModule.forFeature("shoppingCart", shoppingCartReducers),
+    EffectsModule.forFeature([ShoppingCartEffects]),
     CoreModule,
     UserModule,
     ReactiveFormsModule

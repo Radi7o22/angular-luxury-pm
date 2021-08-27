@@ -1,7 +1,7 @@
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {environment} from "src/environments/environment";
-import {User} from "../user/models/user";
+import {User} from "../../user/models/user";
 
 const baseURL = environment.baseURL;
 
@@ -9,16 +9,7 @@ const baseURL = environment.baseURL;
   providedIn: "root"
 })
 export class AuthenticationService {
-  headerOptions: object;
-
-  constructor(private http: HttpClient) {
-    this.headerOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer + token goes here"
-      })
-    };
-  }
+  constructor(private http: HttpClient) {}
 
   login(username: string, password: string) {
     let credentials = {

@@ -25,10 +25,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.credentials$.subscribe((response) => {
         if (response) {
           this.router.navigate(["/"]);
-          // if (form.value.username) {
-          let username = form.value.username;
-          console.log("GET USER REQUEST IS DISPATCHED");
-          // }
         }
       })
     );

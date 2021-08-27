@@ -7,29 +7,17 @@ import {
   getProductsSuccess,
   getCategoriesSuccess,
   getCategoriesFail,
-  makeOrderSuccess,
-  makeOrderFail,
   getProductDetailsSuccess,
   getProductDetailsFail,
-  getProductsInCategory,
   getProductsInCategorySuccess,
   getProductsInCategoryFail
 } from "../+store/actions";
 import {catchError, map, switchMap} from "rxjs/operators";
 import {CategoryService} from "../services/category-service";
-import {OrderService} from "../../shopping-cart/services/order-service";
-import {ItemDetails} from "../models/item-details";
-import {NotificationService} from "src/app/shared/services/notification.service";
 
 @Injectable()
 export class ProductsEffects {
-  constructor(
-    private actions$: Actions,
-    private itemsService: ItemService,
-    private orderService: OrderService,
-    private categoryService: CategoryService,
-    private notificationService: NotificationService
-  ) {}
+  constructor(private actions$: Actions, private itemsService: ItemService, private categoryService: CategoryService) {}
 
   productsList$ = createEffect(() =>
     this.actions$.pipe(
@@ -67,23 +55,6 @@ export class ProductsEffects {
           map((categories) => getCategoriesSuccess({categories})),
           catchError((error) => {
             return [getCategoriesFail({payload: {error}})];
-          })
-        )
-      )
-    )
-  );
-
-  makeOrder$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(ProductsListActionTypes.MAKE_ORDER),
-      switchMap((action: any) =>
-        this.orderService.makeOrder(action.payload.order).pipe(
-          map(() => {
-            this.notificationService.displayMessage("Поръчката е направена успешно!");
-            return makeOrderSuccess();
-          }),
-          catchError((error) => {
-            return [makeOrderFail({payload: {error}})];
           })
         )
       )

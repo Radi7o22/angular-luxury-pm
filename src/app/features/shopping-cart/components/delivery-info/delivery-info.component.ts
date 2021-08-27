@@ -10,6 +10,4 @@ export class DeliveryInfoComponent implements OnInit {
   componentName = "deliveryInfoComponent";
 
   ngOnInit(): void {}
-
-  makeOrder() {}
 }

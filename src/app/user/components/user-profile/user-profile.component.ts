@@ -1,11 +1,11 @@
-import {Component, Input, OnDestroy, OnInit} from "@angular/core";
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {Store} from "@ngrx/store";
 import {Observable, Subscription} from "rxjs";
 import {Constants} from "src/app/core/constants";
-import {makeOrder} from "src/app/features/products/+store/actions";
-import {selectShoppingCartList} from "src/app/features/products/+store/selectors";
+import {makeOrder} from "src/app/features/shopping-cart/+store/actions";
+import {selectShoppingCartList} from "src/app/features/shopping-cart/+store/selectors";
 import {Order} from "src/app/features/shopping-cart/models/order";
 import {getUserProfile, updateUserProfile} from "../../+store/actions";
 import {selectUserData} from "../../+store/selectors";
@@ -28,6 +28,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store<any>, private fb: FormBuilder, private router: Router) {}
   @Input() parentComponentName: string = "";
+  @Output() nameChanged = new EventEmitter<User>();
 
   ngOnInit(): void {
     this.getShoppingCartList();
@@ -75,9 +76,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   setButtonName(): void {
     if (this.parentComponentName === "userComponent") {
-      this.buttonName = "Save";
+      this.buttonName = "Запази";
     } else {
-      this.buttonName = "Order";
+      this.buttonName = "Поръчай";
     }
   }
 
@@ -100,6 +101,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       lastName: this.userForm.get("lastName")!.value
     };
     this.store.dispatch(updateUserProfile({user}));
+    this.nameChanged.emit(user);
   }
 
   makeOrder(): void {

@@ -8,29 +8,34 @@
                         <div class="form-outline mb-4">
                             <input #username="ngModel" ngModel id="formUsername" class="form-control" type="text" name="username" required
                                 minlength="4">
-                            <label class="form-label" for="formUsername">Username</label>
-                            <div class="text-danger" *ngIf="username.errors?.required && username.touched">Username is required</div>
-                            <div class="text-danger" *ngIf="username.errors?.minlength && username.touched">Username must be at least 4
-                                characters</div>
+                            <label class="form-label" for="formUsername">Потребителско име</label>
+                            <small class="text-danger d-block" *ngIf="username.errors?.required && username.touched">Потребителското име е
+                                задължително</small>
+                            <small class="text-danger d-block" *ngIf="username.errors?.minlength && username.touched">Потребителското име
+                                трябва да
+                                е
+                                поне 4 символа</small>
                         </div>
 
                         <div class="form-outline mb-4">
                             <input #password="ngModel" ngModel id="formPassword" class="form-control" type="password" name="password"
                                 required minlength="8">
-                            <label class="form-label" for="formPassword">Password</label>
-                            <div class="text-danger" *ngIf="password.errors?.required && password.touched">Password is required</div>
-                            <div class="text-danger" *ngIf="password.errors?.minlength && password.touched">Password must be at least 8
-                                characters</div>
+                            <label class="form-label" for="formPassword">Парола</label>
+                            <small class="text-danger d-block" *ngIf="password.errors?.required && password.touched">Паролата е
+                                задължителна</small>
+                            <small class="text-danger d-block" *ngIf="password.errors?.minlength && password.touched">Паролата трябва да е
+                                поне 8
+                                символа</small>
                         </div>
 
                         <div class="row mb-4">
                             <div class="col text-center">
-                                Don't have an account?
-                                <a routerLink="/register">Sign up</a>
+                                Нямаш регистрация?
+                                <a routerLink="/register">Регистрирай се</a>
                             </div>
                         </div>
 
-                        <button class="btn btn-danger btn-block" [disabled]="loginForm.invalid" (click)="login(loginForm)">Login</button>
+                        <button class="btn btn-danger btn-block" [disabled]="loginForm.invalid" (click)="login(loginForm)">Вход</button>
                     </form>
                 </div>
             </div>

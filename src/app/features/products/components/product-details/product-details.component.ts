@@ -1,10 +1,12 @@
 import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute, Route} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {Store} from "@ngrx/store";
 import {Observable, Subscription} from "rxjs";
+import {NotificationService} from "src/app/shared/services/notification.service";
 import {getProductDetails} from "../../+store/actions";
 import {selectProductDetails} from "../../+store/selectors";
 import {ItemDetails} from "../../models/item-details";
+import {ProductsService} from "../../services/products.service";
 
 @Component({
   selector: "pm-product-details",
@@ -12,10 +14,15 @@ import {ItemDetails} from "../../models/item-details";
   styleUrls: ["./product-details.component.scss"]
 })
 export class ProductDetailsComponent implements OnInit {
-  constructor(private route: ActivatedRoute, private store: Store<any>) {}
+  constructor(
+    private notificationService: NotificationService,
+    private productsService: ProductsService,
+    private route: ActivatedRoute,
+    private store: Store<any>
+  ) {}
   subscription = new Subscription();
   itemDetails$: Observable<any> = this.store.select(selectProductDetails);
-  mainImg!: string;
+  image!: string;
 
   itemDetails!: ItemDetails;
 
@@ -30,16 +37,22 @@ export class ProductDetailsComponent implements OnInit {
     this.subscription.add(
       this.itemDetails$.subscribe((response) => {
         this.itemDetails = response;
-        this.getProductMainImage();
+        this.getProductDetailsImage();
       })
     );
   }
 
-  getProductMainImage(): string | null {
+  getProductDetailsImage(): string | null {
     if (this.itemDetails != null) {
-      let image = this.itemDetails.images.find((img) => img.main === false);
-      return `url(${image!.path})`;
+      return this.productsService.getProductDetailsImage(this.itemDetails);
     }
     return null;
+  }
+
+  addToCart() {
+    let image = this.productsService.getProductImageForCart(this.itemDetails);
+    let item = this.productsService.transformItemDetails(this.itemDetails, image);
+    this.productsService.addToCart(item);
+    this.notificationService.displayMessage(`Продуктът " ${this.itemDetails.name} " е добавен към количката!`);
   }
 }

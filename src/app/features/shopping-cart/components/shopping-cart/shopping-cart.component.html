@@ -1,8 +1,9 @@
 <div class="container-fluid text-light">
-    <div *ngIf="(shoppingCartList$ | async)?.length === 0">Shopping cart is empty!</div>
+    <div *ngIf="(shoppingCartList$ | async)?.length === 0">Количката е празна!</div>
     <div class="row">
         <div class="col-12">
-            <pm-shopping-cart-item [product]="product" [shoppingCartProducts]="shoppingCartProducts" class="mb-5"
+            <pm-shopping-cart-item (quantityFormControlChange)="isQuantityInvalid($event)" [product]="product"
+                [shoppingCartProducts]="shoppingCartProducts" class="mb-5"
                 *ngFor="let product of shoppingCartList$ | async as shoppingCartProducts">
             </pm-shopping-cart-item>
         </div>
@@ -12,10 +13,10 @@
             <a *ngIf="(shoppingCartList$ | async)?.length > 1" class="btn btn-outline-light" (click)="removeAllItems()" role="button">
                 Премахни всички <i class="fas fa-trash-alt"></i>
             </a>
-            <a *ngIf="(shoppingCartList$ | async)?.length > 0" class="btn btn-danger btn-rounded" (click)="goToDeliveryScreen()"
-                role="button">
+            <button *ngIf="(shoppingCartList$ | async)?.length > 0" class="btn btn-danger btn-rounded" [disabled]="isQuantityControlInvalid"
+                (click)="goToDeliveryScreen()" role="button">
                 Продължи <i class="fas fa-long-arrow-alt-right"></i>
-            </a>
+            </button>
         </div>
     </div>
 </div>

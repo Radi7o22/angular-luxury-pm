@@ -1,6 +1,5 @@
 import {AbstractControl, FormControl, FormGroup, NgForm, NgModelGroup, ValidationErrors} from "@angular/forms";
-import {Observable, Subscription} from "rxjs";
-import {takeUntil} from "rxjs/operators";
+import {Subscription} from "rxjs";
 
 export function emailValidator(control: AbstractControl): ValidationErrors | null {
   let emailRegExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;

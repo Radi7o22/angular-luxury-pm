@@ -8,50 +8,60 @@
                         <div class="form-outline mb-4">
                             <input #username="ngModel" ngModel id="formUsername" class="form-control" type="text" name="username" required
                                 minlength="4">
-                            <label class="form-label" for="formUsername">Username</label>
-                            <div class="text-danger" *ngIf="username.errors?.required && username.touched">Username is required</div>
-                            <div class="text-danger" *ngIf="username.errors?.minlength && username.touched">Username must be at least 4
-                                characters</div>
+                            <label class="form-label" for="formUsername">Потребителско име</label>
+                            <small class="text-danger d-block" *ngIf="username.errors?.required && username.touched">Потребителското име е
+                                задлъжително</small>
+                            <small class="text-danger d-block" *ngIf="username.errors?.minlength && username.touched">Потребителското име
+                                трябва да
+                                е
+                                поне 4 символа</small>
                         </div>
 
                         <div class="form-outline mb-4">
                             <input #email="ngModel" ngModel type="email" name="email" required [pmFormValidator]="emailValidator"
                                 id="formEmail" class="form-control">
-                            <label class="form-label" for="formEmail">Email</label>
-                            <div class="text-danger" *ngIf="email.errors?.required && email.touched">Email is required</div>
-                            <div class="text-danger" *ngIf="email.errors?.invalidEmail && email.touched">Wrong email format</div>
+                            <label class="form-label" for="formEmail">Имейл</label>
+                            <small class="text-danger d-block" *ngIf="email.errors?.required && email.touched">Имейлът е
+                                задължителен</small>
+                            <small class="text-danger d-block" *ngIf="email.errors?.invalidEmail && email.touched">Грешен формат на
+                                имейл</small>
                         </div>
 
                         <div ngModelGroup="passwords" [pmFormValidator]="matchPasswordsValidator" class="form-outline mb-4">
                             <input #password="ngModel" ngModel type="password" name="password" required minlength="8" autocomplete="off"
                                 id="formPassword" class="form-control">
-                            <label class="form-label mb-4" for="formPassword">Password</label>
-                            <div class="text-danger mb-4" *ngIf="password.errors?.required && password.touched">Password is required</div>
-                            <div class="text-danger mb-4" *ngIf="password.errors?.minlength && password.touched">Password must be at least
-                                8 characters</div>
+                            <label class="form-label mb-4" for="formPassword">Парола</label>
+                            <small class="text-danger mb-4 d-block" *ngIf="password.errors?.required && password.touched">Паролата е
+                                задължителна
+                            </small>
+                            <small class="text-danger mb-4 d-block" *ngIf="password.errors?.minlength && password.touched">Паролата трябва
+                                да е поне
+                                8
+                                символа</small>
 
                             <input #repeatPassword="ngModel" ngModel type="password" name="repeatPassword" required minlength="8"
                                 autocomplete="off" id="formRepeatPassword" class="form-control">
-                            <label class="form-label" for="formRepeatPassword"> Repeat Password</label>
-                            <div class="text-danger mb-4" *ngIf="repeatPassword.errors?.required && repeatPassword.touched">Repeat password
-                                is required</div>
-                            <div class="text-danger mb-4" *ngIf="repeatPassword.errors?.minlength && repeatPassword.touched">Repeat password
-                                must be at least 8
-                                characters</div>
-                            <div class="text-danger mb-4" *ngIf="repeatPassword.errors?.invalidPasswords && repeatPassword.touched">Repeat
-                                password doesn't match
-                                password</div>
+                            <label class="form-label" for="formRepeatPassword">Повтори парола</label>
+                            <small class="text-danger mb-4 d-block" *ngIf="repeatPassword.errors?.required && repeatPassword.touched">Полето
+                                за
+                                повтаряне на парола е задължително</small>
+                            <small class="text-danger mb-4 d-block"
+                                *ngIf="repeatPassword.errors?.minlength && repeatPassword.touched">Полето за
+                                повтаряне на парола трябва да е поне 8 символа</small>
+                            <small class="text-danger mb-4 d-block"
+                                *ngIf="repeatPassword.errors?.invalidPasswords && repeatPassword.touched">Двете
+                                пароли не съвпадат</small>
                         </div>
 
                         <div class="row mb-4">
                             <div class="col text-center">
-                                Already have an account?
-                                <a routerLink="/login">Log in</a>
+                                Вече имаш профил?
+                                <a routerLink="/login">Вход</a>
                             </div>
                         </div>
 
                         <button class="btn btn-danger btn-block" [disabled]="registerForm.invalid"
-                            (click)="register(registerForm)">Register</button>
+                            (click)="register(registerForm)">Регистрация</button>
                     </form>
                 </div>
             </div>

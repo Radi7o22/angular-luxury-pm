@@ -1,9 +1,9 @@
 import {createEffect, Actions, ofType} from "@ngrx/effects";
 import {AuthActionTypes, loginFailure, loginSuccess, registerFailure, registerSuccess} from "./actions";
-import {catchError, map, switchMap, takeUntil} from "rxjs/operators";
+import {catchError, map, switchMap} from "rxjs/operators";
 import {Injectable} from "@angular/core";
 import {Constants} from "src/app/core/constants";
-import {AuthenticationService} from "../authentication/authentication.service";
+import {AuthenticationService} from "../authentication/services/authentication.service";
 import {Router} from "@angular/router";
 import {NotificationService} from "../shared/services/notification.service";
 
