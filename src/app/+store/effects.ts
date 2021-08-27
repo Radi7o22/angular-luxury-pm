@@ -4,10 +4,17 @@ import {catchError, map, switchMap, takeUntil} from "rxjs/operators";
 import {Injectable} from "@angular/core";
 import {Constants} from "src/app/core/constants";
 import {AuthenticationService} from "../authentication/authentication.service";
+import {Router} from "@angular/router";
+import {NotificationService} from "../shared/services/notification.service";
 
 @Injectable()
 export class AuthEffects {
-  constructor(private actions$: Actions, private authService: AuthenticationService) {}
+  constructor(
+    private actions$: Actions,
+    private authService: AuthenticationService,
+    private router: Router,
+    private notificationService: NotificationService
+  ) {}
 
   login$ = createEffect(() =>
     this.actions$.pipe(
@@ -18,6 +25,8 @@ export class AuthEffects {
             localStorage.setItem(Constants.JWT, JSON.stringify(response.headers.get("Authorization")));
             localStorage.setItem(Constants.LOGGED_USERNAME, JSON.stringify(action.credentials.username));
             localStorage.setItem(Constants.IS_USER_LOGGED_IN, "true");
+            let username = JSON.parse(localStorage.getItem(Constants.LOGGED_USERNAME)!);
+            console.log("JSON TOKEN RECEIVED");
             return loginSuccess();
           }),
           catchError((error) => {
@@ -34,7 +43,12 @@ export class AuthEffects {
       ofType(AuthActionTypes.REGISTER),
       switchMap((action: any) =>
         this.authService.register(action.payload).pipe(
-          map(() => registerSuccess()),
+          map((response: any) => {
+            this.router.navigateByUrl("/login");
+
+            this.notificationService.displayMessage(response.message);
+            return registerSuccess();
+          }),
           catchError((error) => {
             console.log(error);
             return [registerFailure({payload: {error}})];

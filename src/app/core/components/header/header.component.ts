@@ -11,9 +11,4 @@ export class HeaderComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-
-  logout() {
-    localStorage.removeItem(Constants.JWT);
-    localStorage.removeItem(Constants.LOGGED_USERNAME);
-  }
 }

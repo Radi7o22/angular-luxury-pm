@@ -10,22 +10,24 @@ const baseURL = environment.baseURL;
   providedIn: "root"
 })
 export class UserService {
-  headerOptions: any;
-
   constructor(private http: HttpClient) {
-    this.headerOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: `Bearer${localStorage.getItem(Constants.JWT)}`
-      })
-    };
+    console.log("headers in constructor are loaded");
   }
 
   updateProfile(user: User) {
-    return this.http.post(`${baseURL}/users/update`, user, this.headerOptions);
+    return this.http.post(`${baseURL}/users/update`, user, this.getHeaders());
   }
 
   getProfile(username: string) {
-    return this.http.get(`${baseURL}/users/${username}`, this.headerOptions);
+    return this.http.get(`${baseURL}/users/${username}`, this.getHeaders());
+  }
+
+  getHeaders() {
+    return {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: JSON.parse(localStorage.getItem(Constants.JWT)!)
+      })
+    };
   }
 }

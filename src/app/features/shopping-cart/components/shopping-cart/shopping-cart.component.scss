@@ -1,5 +1,18 @@
 .container-fluid {
   background-color: #303030;
   padding: 10rem;
-  height: 100vh;
+  min-height: 100vh;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  font-size: 1.4rem;
+}
+
+a:hover {
+  color: black !important;
 }

@@ -13,31 +13,16 @@ import {selectCategories, selectProductsListProducts} from "../../+store/selecto
 export class ProductsListComponent implements OnInit {
   constructor(private store: Store<any>) {}
   productsList$: Observable<any> = this.store.select(selectProductsListProducts);
-  categories$: Observable<any> = this.store.select(selectCategories);
   subscription = new Subscription();
 
   ngOnInit(): void {
     this.subscription = new Subscription();
     this.getProducts();
-    this.getCategories();
   }
 
   getProducts() {
     this.store.dispatch(getProducts());
-    this.subscription.add(
-      this.productsList$.subscribe((response) => {
-        console.log("Items are" + response);
-      })
-    );
-  }
-
-  getCategories() {
-    this.store.dispatch(getCategories());
-    this.subscription.add(
-      this.categories$.subscribe((response) => {
-        console.log("Categories are" + response);
-      })
-    );
+    this.subscription.add(this.productsList$.subscribe((response) => {}));
   }
 
   ngOnDestroy(): void {

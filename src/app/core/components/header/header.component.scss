@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Acme&display=swap");
+
 #introCarousel,
 .carousel-inner,
 .carousel-item,
@@ -6,10 +8,10 @@
 }
 
 .carousel-item:nth-child(1) {
-  background-image: url(../../../../assets/images/pm_header.jpg);
+  background-image: url(../../../../assets/images/pm_header1.jpg);
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center center;
+  background-position: 50% 80%;
 }
 .carousel-item:nth-child(2) {
   background-image: url("https://mdbootstrap.com/img/Photos/Others/images/77.jpg");
@@ -39,4 +41,13 @@
 
 .mask {
   height: 100%;
+}
+
+a:hover {
+  color: #524f50 !important;
+}
+
+h1 {
+  font-family: "Acme", sans-serif;
+  font-size: 4.8rem;
 }

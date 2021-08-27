@@ -11,8 +11,9 @@ import {StoreModule} from "@ngrx/store";
 import {EffectsModule} from "@ngrx/effects";
 import {ProductsEffects} from "./products/+store/effects";
 import {productsReducers} from "./products/+store";
-import {HeaderComponent} from "../core/components/header/header.component";
 import {CoreModule} from "../core/core.module";
+import {UserModule} from "../user/user.module";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,9 @@ import {CoreModule} from "../core/core.module";
     FeaturesRoutingModule,
     StoreModule.forFeature("products", productsReducers),
     EffectsModule.forFeature([ProductsEffects]),
-    CoreModule
+    CoreModule,
+    UserModule,
+    ReactiveFormsModule
   ],
   exports: []
 })

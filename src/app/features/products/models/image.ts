@@ -1,5 +1,5 @@
 export class Image {
   id!: number;
   path!: string;
-  isMain!: boolean;
+  main!: boolean;
 }

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
     <div class="container">
         <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,15 +11,18 @@
             </a>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="/products" routerLinkActive="active">Products</a>
+                    <a class="nav-link" routerLink="/products" routerLinkActive="active">Продукти</a>
                 </li>
                 <li class="nav-item me-3 me-lg-0 dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                        Categories
+                        Категории
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li *ngFor="let category of categories$ | async as categories">
-                            <a class="dropdown-item" href="#">{{category.name}}</a>
+                        <li *ngFor="let category of categories$ | async as categories" (click)="loadProductsInCategory(category)">
+                            <a class="dropdown-item">{{category.name}}</a>
+                        </li>
+                        <li (click)="loadAllProducts()">
+                            <a class="dropdown-item">Всички</a>
                         </li>
                     </ul>
                 </li>
@@ -29,25 +32,25 @@
         <div class="d-flex align-items-center">
             <a class="text-reset me-3 dropdown-toggle hidden-arrow" role="button" aria-expanded="false">
                 <i routerLink="/shopping-cart" routerLinkActive="active" class="fas fa-shopping-cart"></i>
-                <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                <span class="badge rounded-pill badge-notification bg-danger">{{itemsInCartQUantity}}</span>
             </a>
             <ul *ngIf="!isUserLoggedIn()" class="navbar-nav flex-row d-none d-md-flex">
                 <li class="nav-item me-3 me-lg-0">
-                    <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+                    <a class="nav-link" routerLink="/login" routerLinkActive="active">Вход</a>
                 </li>
                 <li class="nav-item me-3 me-lg-0">
-                    <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
+                    <a class="nav-link" routerLink="/register" routerLinkActive="active">Регистрация</a>
                 </li>
             </ul>
 
             <ul *ngIf="isUserLoggedIn()" class="navbar-nav">
                 <li class="nav-item me-3 me-lg-0">
                     <a class="nav-link" routerLink="/user-profile" routerLinkActive="active">
-                        <i class="fas fa-user"></i>
+                        <!-- <i class="fas fa-user"></i> -->Профил
                     </a>
                 </li>
                 <li class="nav-item me-3 me-lg-0">
-                    <a class="nav-link" (click)="logout()">Logout</a>
+                    <a class="nav-link" (click)="logout()">Изход</a>
                 </li>
             </ul>
         </div>

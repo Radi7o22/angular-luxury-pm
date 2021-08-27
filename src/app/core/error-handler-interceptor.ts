@@ -11,7 +11,6 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler) {
     return next.handle(request).pipe(
-      retry(2),
       catchError((error: HttpErrorResponse) => {
         let errorMessage = this.checkErrorStatus(error);
         this.notificationService.displayMessage(errorMessage);
@@ -23,6 +22,10 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
   checkErrorStatus(error: HttpErrorResponse): string {
     let userErrorMessage: string;
     switch (error.status) {
+      case 409: {
+        userErrorMessage = error.error;
+        break;
+      }
       case 404: {
         userErrorMessage = "Resource is not found";
         break;

@@ -1,16 +1,45 @@
-<div class="card m-3 card-container">
-    <div class="row g-0">
-        <div class="col-md-2 m-3">
-            <img src="https://mdbootstrap.com/wp-content/uploads/2020/06/vertical.jpg" alt="..."
-                class="m-3 img-fluid z-depth-2 rounded-circle" />
+<div class="card card-container mb-3">
+    <div class="row g-0 p-2">
+        <div class="col-md-2 ml-3">
+            <img src={{product.mainImagePath}} alt="..." class="m-3 img-fluid z-depth-2" />
         </div>
-        <div class="col-md-9">
-            <div class="card-body">
-                <h3 class="card-title">{{product.name}}</h3>
-                <p class="card-text ">
-                    <small>{{product.price | currency: "BG"}}</small>
-                </p>
+        <div class="col-md-9 product-details-container">
+            <div class="row" style="width: 100%">
+                <div class="col-12">
+                    <div class="row card-body">
+                        <div class="col-7">
+                            <h3 class="card-title">{{product.name}}</h3>
+                        </div>
+                        <div class="col-5">
+                            <div class="card-text row">
+                                <div class="col-12 d-flex flex-row justify-content-between align-items-center">
+                                    <span>{{product.price*product.quantity | currency: "BG"}}</span>
+
+                                    <div class="quantity">
+                                        <input class="form-control" [formControl]="quantity" (change)="changeItemQuantity()" type="number">
+                                    </div>
+                                    <a class="danger" (click)="removeItemFromCart()" role="button">
+                                        <i class="fas fa-lg fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-7"></div>
+                        <div class="col-5">
+                            <small class="text-danger d-block"
+                                *ngIf="quantity.errors?.required && (quantity.touched || quantity.dirty)">Моля
+                                въведете
+                                количество</small>
+                            <small class="text-danger d-block"
+                                *ngIf="quantity.errors?.pattern && (quantity.touched || quantity.dirty)">Количеството
+                                трябва да е едноцифрено или двуцифрено цяло положително число</small>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 </div>

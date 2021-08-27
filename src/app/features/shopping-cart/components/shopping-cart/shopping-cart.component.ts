@@ -1,6 +1,8 @@
 import {Component, OnInit} from "@angular/core";
+import {Router} from "@angular/router";
 import {Store} from "@ngrx/store";
 import {Observable, Subscription} from "rxjs";
+import {deleteAllItemsFromCart, deleteItemFromCart} from "src/app/features/products/+store/actions";
 import {selectShoppingCartList} from "src/app/features/products/+store/selectors";
 
 @Component({
@@ -9,16 +11,16 @@ import {selectShoppingCartList} from "src/app/features/products/+store/selectors
   styleUrls: ["./shopping-cart.component.scss"]
 })
 export class ShoppingCartComponent implements OnInit {
-  constructor(private store: Store<any>) {}
+  constructor(private store: Store<any>, private router: Router) {}
 
   shoppingCartList$: Observable<any> = this.store.select(selectShoppingCartList);
-  // subscription = new Subscription();
 
-  ngOnInit(): void {
-    // this.subscription.add(
-    //   this.shoppingCartList$.subscribe((response) => {
-    //     console.log("Shopping cart items are" + response);
-    //   })
-    // );
+  ngOnInit(): void {}
+  removeAllItems() {
+    this.store.dispatch(deleteAllItemsFromCart());
+  }
+
+  goToDeliveryScreen() {
+    this.router.navigateByUrl("/delivery-info");
   }
 }

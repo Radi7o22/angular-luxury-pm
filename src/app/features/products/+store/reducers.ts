@@ -2,14 +2,27 @@ import {createReducer, on} from "@ngrx/store";
 import {ItemInOrder} from "../../shopping-cart/models/item-in-order";
 import {Category} from "../models/category";
 import {Item} from "../models/item";
+import {ItemDetails} from "../models/item-details";
 import {
   addProductToCart,
+  changeProductQuantityInCart,
+  deleteAllItemsFromCart,
+  deleteItemFromCart,
   getCategories,
   getCategoriesFail,
   getCategoriesSuccess,
+  getProductDetails,
+  getProductDetailsFail,
+  getProductDetailsSuccess,
   getProducts,
   getProductsFail,
-  getProductsSuccess
+  getProductsInCategory,
+  getProductsInCategoryFail,
+  getProductsInCategorySuccess,
+  getProductsSuccess,
+  makeOrder,
+  makeOrderFail,
+  makeOrderSuccess
 } from "./actions";
 
 export interface ProductsListData {
@@ -18,6 +31,7 @@ export interface ProductsListData {
   readonly errorMessage: any;
   readonly categories: Category[] | null;
   readonly shoppingCartItems: ItemInOrder[];
+  readonly itemDetails: ItemDetails | null;
 }
 
 export const initialProductsListState: ProductsListData = {
@@ -25,21 +39,22 @@ export const initialProductsListState: ProductsListData = {
   isLoading: false,
   errorMessage: null,
   categories: null,
-  shoppingCartItems: []
+  shoppingCartItems: [],
+  itemDetails: null
 };
 
 export const productsListReducer = createReducer(
   initialProductsListState,
-  on(getProducts, getCategories, (state) => ({
+  on(getProducts, getCategories, makeOrder, getProductDetails, getProductsInCategory, (state) => ({
     ...state,
     isLoading: true
   })),
-  on(getProductsSuccess, (state, {products}) => ({
+  on(getProductsSuccess, getProductsInCategorySuccess, (state, {products}) => ({
     ...state,
     products: products,
     isLoading: false
   })),
-  on(getProductsFail, getCategoriesFail, (state, error) => ({
+  on(getProductsFail, getCategoriesFail, makeOrderFail, getProductDetailsFail, getProductsInCategoryFail, (state, error) => ({
     ...state,
     isLoading: false,
     errorMessage: error
@@ -52,5 +67,27 @@ export const productsListReducer = createReducer(
   on(addProductToCart, (state, {item}) => ({
     ...state,
     shoppingCartItems: [...state.shoppingCartItems, item]
+  })),
+  on(makeOrderSuccess, (state) => ({
+    ...state,
+    shoppingCartItems: [],
+    isLoading: false
+  })),
+  on(getProductDetailsSuccess, (state, {payload: {item}}) => ({
+    ...state,
+    isLoading: false,
+    itemDetails: item
+  })),
+  on(changeProductQuantityInCart, (state, {shoppingCartItems}) => ({
+    ...state,
+    shoppingCartItems: shoppingCartItems
+  })),
+  on(deleteItemFromCart, (state, {item}) => ({
+    ...state,
+    shoppingCartItems: state.shoppingCartItems.filter((itemInCart) => itemInCart.itemId !== item.itemId)
+  })),
+  on(deleteAllItemsFromCart, (state) => ({
+    ...state,
+    shoppingCartItems: []
   }))
 );
