@@ -5,6 +5,7 @@ import {RegisterComponent} from "./register/register.component";
 import {FormsModule} from "@angular/forms";
 import {AuthenticationRoutingModule} from "./authentication-routing.module";
 import {SharedModule} from "../shared/shared.module";
+import { AuthenticationService } from "./services/authentication.service";
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent],

@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnDestroy, OnInit} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {Store} from "@ngrx/store";
 import {Observable, Subscription} from "rxjs";
@@ -13,7 +13,7 @@ import {ProductsService} from "../../services/products.service";
   templateUrl: "./product-details.component.html",
   styleUrls: ["./product-details.component.scss"]
 })
-export class ProductDetailsComponent implements OnInit {
+export class ProductDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private notificationService: NotificationService,
     private productsService: ProductsService,
@@ -55,4 +55,9 @@ export class ProductDetailsComponent implements OnInit {
     this.productsService.addToCart(item);
     this.notificationService.displayMessage(`Продуктът " ${this.itemDetails.name} " е добавен към количката!`);
   }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+  
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnDestroy, OnInit} from "@angular/core";
 import {Store} from "@ngrx/store";
 import {Observable, Subscription} from "rxjs";
 import {getProducts} from "../../+store/actions";
@@ -9,7 +9,7 @@ import {selectProductsListProducts} from "../../+store/selectors";
   templateUrl: "./products-list.component.html",
   styleUrls: ["./products-list.component.scss"]
 })
-export class ProductsListComponent implements OnInit {
+export class ProductsListComponent implements OnInit, OnDestroy {
   constructor(private store: Store<any>) {}
   productsList$: Observable<any> = this.store.select(selectProductsListProducts);
   subscription = new Subscription();

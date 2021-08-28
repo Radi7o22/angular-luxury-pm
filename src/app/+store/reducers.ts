@@ -2,7 +2,6 @@ import {createReducer, on} from "@ngrx/store";
 import {login, loginFailure, loginSuccess, register, registerFailure, registerSuccess} from "./actions";
 
 export interface AuthData {
-  //pointless, remove later
   readonly isLoggedIn: boolean;
   readonly isLoading: boolean;
   readonly errorMessage: any;

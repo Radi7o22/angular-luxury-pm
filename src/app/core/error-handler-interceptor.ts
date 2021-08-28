@@ -27,28 +27,28 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
         break;
       }
       case 404: {
-        userErrorMessage = "Resource is not found";
+        userErrorMessage = "Ресурсът не е открит!";
         break;
       }
       case 403: {
-        userErrorMessage = "Username or password is incorrect";
+        userErrorMessage = "Въведените потребителско име или парола са некоректни!";
         break;
       }
       case 401: {
-        userErrorMessage = "Please login to your account";
+        userErrorMessage = "Моля, впишете се в акаунта си!";
         this.router.navigate(["/login"]);
         break;
       }
       case 500: {
-        userErrorMessage = "Internal server error";
+        userErrorMessage = "Възникна грешка в услугата.";
         break;
       }
       case 0: {
-        userErrorMessage = "Service is unavailable";
+        userErrorMessage = "Услугата не е налична.";
         break;
       }
       default: {
-        userErrorMessage = "Unknown server error";
+        userErrorMessage = "Възникна непредвидена грешка!";
       }
     }
     return userErrorMessage;

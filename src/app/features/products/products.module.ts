@@ -14,4 +14,5 @@ import {ProductsRoutingModule} from "./products-routing.module";
   declarations: [ProductItemComponent, ProductsListComponent, ProductDetailsComponent],
   imports: [CommonModule, StoreModule.forFeature("products", productsReducers), EffectsModule.forFeature([ProductsEffects]), CoreModule, ProductsRoutingModule]
 })
+
 export class ProductsModule {}
